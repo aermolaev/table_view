@@ -1,0 +1,18 @@
+<%
+  table_view(@users,
+             :id => 'users',
+             :no_thead => params[:no_thead],
+             :no_colgroup => params[:no_colgroup],
+             :class => 'users-table') do |t|
+
+    t.row { |u| { :id => u.login } } if params[:custom_row]
+
+    t.column :login, :title => 'Login' do |u|
+      link_to h(u.login), :controller => 'users', :action => 'show', :id => u.id
+    end
+
+    t.column :email, :title => 'Email', :data => Proc.new { |u| h(u.email) }
+
+    t.column :mail
+  end
+%>
